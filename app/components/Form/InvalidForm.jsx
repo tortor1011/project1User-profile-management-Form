@@ -42,6 +42,7 @@ export default function InvalidForm() {
       ...prevForm,
       [name]: value,
     }));
+    console.log('formData', formData);
   };
   const handleSubmit = ()=> {
     console.log('submit', formData );
@@ -104,6 +105,8 @@ export default function InvalidForm() {
                 variant="outlined" 
                 value={formData.LastName}
                 onChange={handleChange}/>
+                required
+                
             </Item>
             <Item>
               <TextField 
