@@ -199,7 +199,7 @@ export default function InvalidForm() {
               labelId="demo-simple-select-label"
               id="Status"
               name="Status"
-              value={formData .Status}
+              value={formData.Status}
               label="Status"
               onChange={handleChange}
             >
@@ -215,7 +215,7 @@ export default function InvalidForm() {
                  id="Note" 
                  label="Note" 
                  variant="outlined" 
-                 value={formData .Note}
+                 value={formData.Note}
                  onChange={handleChange}/>
             </Item>
             <Item>
