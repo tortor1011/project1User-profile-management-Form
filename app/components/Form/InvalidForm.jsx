@@ -1,5 +1,5 @@
 'use client';
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -10,7 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import FormControl from '@mui/material/FormControl';
+import FormControl, { formControlClasses } from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormGroup from '@mui/material/FormGroup';
 import InputLabel from '@mui/material/InputLabel';
@@ -20,21 +20,71 @@ import Button from '@mui/material/Button';
 
 
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
-  }),
-}));
-
-export default function ColumnLayoutInsideGrid() {
 
 
 
+export default function InvalidForm() {
+  const [formData , setFormData] = useState({
+    Name: '',
+    LastName: '',
+    Email: '',
+    Confirm: false,
+    Gender: '',
+    Hobby: [],
+    Status: '',
+    Note: '',
+  });
+
+
+  const handleChange = (event) => {
+    const {name, value} = event.target;
+    setFormData((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = ()=> {
+    console.log('submit', formData );
+    alert('submitted:\n'+ JSON.stringify(formData, null, 2));
+  }
+  const handleReset = ()=> {
+    const resetFormData = {
+      Name: '',
+      LastName: '',
+      Email: '',
+      Confirm: false,
+      Gender: '',
+      Hobby: [],
+      Status: '',
+      Note: '',
+    };
+    setFormData(resetFormData);
+  
+
+  }
+  const handleCheckboxGroupChange = (event) => {
+    const { value, checked } = event.target;
+    setFormData((prevForm) => ({
+      ...prevForm,
+      Hobby : checked 
+       ? [... prevForm.Hobby, value]
+       :prevForm.Hobby.filter((hobby) => hobby !== value),
+    }));
+  }
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    ...theme.applyStyles('dark', {
+      backgroundColor: '#1A2027',
+    }),
+    
+  }));
+  
+ 
   return (
     
     <div className="MuiBox-root css-1i3v59a">
@@ -43,35 +93,58 @@ export default function ColumnLayoutInsideGrid() {
 
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <Grid size={4}>
+        <Grid item xs={4}>
           <Stack spacing={2}>
             <Item>
-                <TextField id="outlined-basic" label="Name" variant="outlined" />
-                <TextField id="outlined-basic" label="Last name" variant="outlined" />
+                <TextField 
+                name="Name"
+                id="Name" 
+                label="Name" 
+                variant="outlined" 
+                value={formData.Name}
+                onChange={handleChange}/>
+                <TextField 
+                name="LastName"
+                id="LastName" 
+                label="Last name" 
+                variant="outlined" 
+                value={formData.LastName}
+                onChange={handleChange}/>
             </Item>
             <Item>
-              <TextField id="outlined-E" label="Email" variant="outlined" />
+              <TextField 
+                    type="email"
+                    name="Email"
+                    id="Email" 
+                    label="Email" 
+                    variant="outlined" 
+                    value={formData.Email}
+                    onChange={handleChange}/>
             </Item>
             <Item>
-              <FormControlLabel control={<Checkbox defaultChecked />} label="Confirm PDPA" />
+              <FormControlLabel              
+                    control={<Checkbox 
+                      name="Confirm"
+                      checked={formData.Confirm}
+                      onChange={(event) => setFormData({ ...formData, Confirm: event.target.checked })}
+                      id='Confirm'  />} 
+                    label="Confirm PDPA" />
             </Item>
             <Item>
              <FormControl>
-                    <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
+                    <FormLabel 
+                    id="Gender">Gender</FormLabel>
                   <RadioGroup
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
+                    name="Gender"
+                    value={formData.Gender}
+                    onChange={handleChange}
                   >
                     <FormControlLabel value="female" control={<Radio />} label="Female" />
                     <FormControlLabel value="male" control={<Radio />} label="Male" />
-                    <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    <FormControlLabel
-                      value="disabled"
-                      disabled
-                      control={<Radio />}
-                      label="other"
-                    />
+                    <FormControlLabel value="etc" control={<Radio />} label="etc" />
+
                   </RadioGroup>
                   
                 </FormControl>
@@ -82,23 +155,31 @@ export default function ColumnLayoutInsideGrid() {
                   <FormLabel component="legend">Hobby</FormLabel>
                   <FormGroup aria-label="position" row>
                     <FormControlLabel
-                      value="bottom"
+                      value="Game"
+                      checked={formData.Hobby.includes('Game')}
+                      onChange={handleCheckboxGroupChange}
                       control={<Checkbox />}
                       label="Game"
                       
                     />
                     <FormControlLabel
-                      value="end"
+                      value="Music"
+                      checked={formData.Hobby.includes('Music')}
+                      onChange={handleCheckboxGroupChange}
                       control={<Checkbox />}
                       label="Music"
                     />
                     <FormControlLabel
-                      value="end"
+                      value="Craft"
+                      checked={formData.Hobby.includes('Craft')}
+                      onChange={handleCheckboxGroupChange}  
                       control={<Checkbox />}
                       label="Craft"
                     />
                     <FormControlLabel
-                      value="end"
+                      value="Reading"
+                      checked={formData.Hobby.includes('Reading')}
+                      onChange={handleCheckboxGroupChange}
                       control={<Checkbox />}
                       label="Reading"
                     />
@@ -110,27 +191,34 @@ export default function ColumnLayoutInsideGrid() {
             <InputLabel id="demo-simple-select-label">Status</InputLabel>
             <Select
               labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={Status}
+              id="Status"
+              name="Status"
+              value={formData .Status}
               label="Status"
               onChange={handleChange}
             >
-              <MenuItem value={10}>Single</MenuItem>
-              <MenuItem value={20}>Married</MenuItem>
-              <MenuItem value={30}>Divorce</MenuItem>
+              <MenuItem value="Single">Single</MenuItem>
+              <MenuItem value="Married">Married</MenuItem>
+              <MenuItem value="Divorce">Divorce</MenuItem>
             </Select>
           </FormControl>
             </Item>
             <Item>
-                <TextField id="outlined-basic" label="Note" variant="outlined" />
+                <TextField
+                 name='Note'
+                 id="Note" 
+                 label="Note" 
+                 variant="outlined" 
+                 value={formData .Note}
+                 onChange={handleChange}/>
             </Item>
             <Item>
-            <Button variant="contained">RESET</Button>
-            <Button variant="contained">SUBMIT</Button>
+            <Button variant="outlined" onClick={handleReset}>RESET</Button>
+            <Button variant="contained" onClick={handleSubmit}>SUBMIT</Button>
             </Item>
           </Stack>
         </Grid>
-        <Grid size={8}>
+        <Grid item xs={8}>
           <Item sx={{ height: '100%', boxSizing: 'border-box' }}>Column 2</Item>
         </Grid>
       </Grid>
