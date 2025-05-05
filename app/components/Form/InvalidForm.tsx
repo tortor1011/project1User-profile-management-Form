@@ -24,7 +24,16 @@ import Button from '@mui/material/Button';
 
 
 export default function InvalidForm() {
-  const [formData , setFormData] = useState({
+  const [formData , setFormData] = useState<{
+    Name: string;
+    LastName: string;
+    Email: string;
+    Confirm: boolean;
+    Gender: string;
+    Hobby: string[];
+    Status: string;
+    Note: string;
+  }>({
     Name: '',
     LastName: '',
     Email: '',
@@ -36,7 +45,7 @@ export default function InvalidForm() {
   });
 
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
     setFormData((prevForm) => ({
       ...prevForm,
@@ -63,7 +72,7 @@ export default function InvalidForm() {
   
 
   }
-  const handleCheckboxGroupChange = (event) => {
+  const handleCheckboxGroupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
     setFormData((prevForm) => ({
       ...prevForm,
@@ -88,7 +97,7 @@ export default function InvalidForm() {
 
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <Grid item xs={4}>
+        {/* <Grid item={true} xs={4}> */}
           <Stack spacing={2}>
             <Item>
                 <TextField 
@@ -105,7 +114,7 @@ export default function InvalidForm() {
                 variant="outlined" 
                 value={formData.LastName}
                 onChange={handleChange}/>
-                required
+          
                 
             </Item>
             <Item>
@@ -214,10 +223,10 @@ export default function InvalidForm() {
             <Button variant="contained" onClick={handleSubmit}>SUBMIT</Button>
             </Item>
           </Stack>
-        </Grid>
-        <Grid item xs={8}>
+        {/* </Grid> */}
+        {/* <Grid item xs={8}> */}
           <Item sx={{ height: '100%', boxSizing: 'border-box' }}>Column 2</Item>
-        </Grid>
+        {/* </Grid> */}
       </Grid>
     </Box>
     </div>
