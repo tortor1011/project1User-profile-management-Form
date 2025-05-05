@@ -49,15 +49,15 @@ const handleSubmit = (e: React.FormEvent)=> {
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid size={6}>
             <form onSubmit={handleSubmit}>
-            <Item>
-                <TextField 
+            <Item sx={{m:2}}>
+                <TextField sx={{m:2}}
                 name="Name"
                 id="Name" 
                 label="Name" 
                 variant="outlined"
                 onChange={handleChange}
                 value={formData.Name}/>
-                <TextField 
+                <TextField sx={{m:2}}
                 name="LastName"
                 id="LastName" 
                 label="Last name" 
@@ -67,7 +67,7 @@ const handleSubmit = (e: React.FormEvent)=> {
                 
                 
             </Item>
-            <Item>
+            <Item sx={{m:2}}>
 
                 <Button variant="contained" type='submit'>SUBMIT</Button>
             </Item>
