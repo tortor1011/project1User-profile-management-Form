@@ -17,9 +17,31 @@ import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
+import { Theme } from '@mui/material/styles';
+import '../css/card.css';
 
 
-
+declare module '@mui/material/styles' {
+    interface Theme {
+      vars?: {
+        palette: {
+          text: {
+            secondary: string;
+          };
+        };
+      };
+    }
+  
+    interface ThemeOptions {
+      vars?: {
+        palette?: {
+          text?: {
+            secondary?: string;
+          };
+        };
+      };
+    }
+  }
 
 
 
@@ -44,7 +66,7 @@ export default function InvalidForm() {
     Note: '',
   });
 
-  const [name, setName] = useState('default')
+
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
@@ -84,11 +106,7 @@ export default function InvalidForm() {
     }));
   }
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-  }));
+
 
 
  
@@ -102,21 +120,16 @@ export default function InvalidForm() {
       <Grid container spacing={2}>
         {/* <Grid item={true} xs={4}> */}
           <Stack spacing={2}>
-            <Item sx={{ m: 2}}>
-                <TextField sx={{ m: 2,marginLeft: 2,fullWidth: 1 }}
+            <div className='item'>
+                <TextField sx={{ m: 2,marginLeft: 2 }}
                 name="Name"
                 id="Name" 
                 label="Name" 
                 variant="outlined"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value)
-                }}
-                // value={formData.Name}
-                // value="ddddd"
-                // onChange={handleChange}
-                />
-                <TextField sx={{ m: 2,marginLeft: 17}}
+                value={formData.Name}
+                onChange={handleChange}/>
+                
+                <TextField sx={{ m: 2,marginLeft: 1}}
                 name="LastName"
                 id="LastName" 
                 label="Last name" 
@@ -124,10 +137,8 @@ export default function InvalidForm() {
                 value={formData.LastName}
                 onChange={handleChange}/>
           
-                
-            </Item>
-            <Item>
-              <TextField fullWidth
+                <br></br>          
+              <TextField sx={{ m: 2,marginLeft: 1}}
                     type="email"
                     name="Email"
                     id="Email" 
@@ -136,18 +147,18 @@ export default function InvalidForm() {
                     variant="outlined" 
                     value={formData.Email}
                     onChange={handleChange}/>
-            </Item>
-            <Item>
-              <FormControlLabel              
+            
+            <div >
+                <FormControlLabel              
                     control={<Checkbox 
                       name="Confirm"
                       checked={formData.Confirm}
                       onChange={(event) => setFormData({ ...formData, Confirm: event.target.checked })}
                       id='Confirm'  />} 
                     label="Confirm PDPA" />
-            </Item>
-            <Item>
-             <FormControl>
+            </div>
+            
+               <FormControl>
                     <FormLabel 
                     id="Gender">Gender</FormLabel>
                   <RadioGroup
@@ -204,48 +215,48 @@ export default function InvalidForm() {
                     />
                   </FormGroup>
                 </FormControl>
-            </Item>
             
-            <Item>
-            <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Status</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="Status"
-              name="Status"
-              value={formData.Status}
-              label="Status"
-              onChange={(event: SelectChangeEvent) => {
-                const { name, value } = event.target;
-                setFormData((prevForm) => ({
-                  ...prevForm,
-                  [name]: value,
-                }));
-              }}
-            >
-              <MenuItem value="Single">Single</MenuItem>
-              <MenuItem value="Married">Married</MenuItem>
-              <MenuItem value="Divorce">Divorce</MenuItem>
-            </Select>
-          </FormControl>
-            </Item>
-            <Item>
-                <TextField fullWidth
-                 name='Note'
-                 id="Note" 
-                 label="Note" 
-                 variant="outlined" 
-                 value={formData.Note}
-                 onChange={handleChange}/>
-            </Item>
-            <Item sx={{ display: 'flex', justifyContent: 'space-between', padding: 2}}>
-            <Button variant="outlined" onClick={handleReset}>RESET</Button>
-            <Button variant="contained" onClick={handleSubmit}>SUBMIT</Button>
-            </Item>
+            
+            
+                    <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-label"
+                    id="Status"
+                    name="Status"
+                    value={formData.Status}
+                    label="Status"
+                    onChange={(event: SelectChangeEvent) => {
+                        const { name, value } = event.target;
+                        setFormData((prevForm) => ({
+                        ...prevForm,
+                        [name]: value,
+                        }));
+                    }}
+                    >
+                    <MenuItem value="Single">Single</MenuItem>
+                    <MenuItem value="Married">Married</MenuItem>
+                    <MenuItem value="Divorce">Divorce</MenuItem>
+                    </Select>
+                </FormControl>
+                    
+                    
+                        <TextField fullWidth
+                        name='Note'
+                        id="Note" 
+                        label="Note" 
+                        variant="outlined" 
+                        value={formData.Note}
+                        onChange={handleChange}/>
+                    
+                    
+                    <Button variant="outlined" onClick={handleReset}>RESET</Button>
+                    <Button variant="contained" onClick={handleSubmit}>SUBMIT</Button>
+            </div>
           </Stack>
         {/* </Grid> */}
-        {/* <Grid item xs={8}> */}
-          <Item sx={{ height: '100%', boxSizing: 'border-box' }}>Column 2</Item>
+        {/* <Grid div xs={8}> */}
+          <div>Column 2</div>
         {/* </Grid> */}
       </Grid>
     </Box>
