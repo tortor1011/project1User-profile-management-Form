@@ -3,7 +3,6 @@ import React from 'react';
 import Header from './components/header';
 import { SelectChangeEvent } from '@mui/material/Select';
 import InvalidForm from './components/Form/InvalidForm';
-import DebugForm from './components/Form/debugForm';
 
 
 
@@ -19,7 +18,7 @@ export default function ColumnLayoutInsideGrid() {
     <div className="MuiBox-root css-1i3v59a">
       <Header/>
       <div className="MuiBox-root css-1i3v59a">
-          <DebugForm/>
+          <InvalidForm/>
         </div>
     </div>
   );

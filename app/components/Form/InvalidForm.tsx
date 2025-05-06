@@ -95,19 +95,19 @@ export default function InvalidForm() {
       
       
 
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 , padding: 2}}>
       <Grid container spacing={2}>
         {/* <Grid item={true} xs={4}> */}
           <Stack spacing={2}>
-            <Item>
-                <TextField 
+            <Item sx={{ m: 2}}>
+                <TextField sx={{ m: 2,marginLeft: 2,fullWidth: 1 }}
                 name="Name"
                 id="Name" 
                 label="Name" 
                 variant="outlined" 
                 value={formData.Name}
                 onChange={handleChange}/>
-                <TextField 
+                <TextField sx={{ m: 2,marginLeft: 17}}
                 name="LastName"
                 id="LastName" 
                 label="Last name" 
@@ -118,11 +118,12 @@ export default function InvalidForm() {
                 
             </Item>
             <Item>
-              <TextField 
+              <TextField fullWidth
                     type="email"
                     name="Email"
                     id="Email" 
                     label="Email" 
+                  
                     variant="outlined" 
                     value={formData.Email}
                     onChange={handleChange}/>
@@ -145,7 +146,13 @@ export default function InvalidForm() {
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="Gender"
                     value={formData.Gender}
-                    onChange={handleChange}
+                    onChange={(event: SelectChangeEvent) => {
+                      const { name, value } = event.target;
+                      setFormData((prevForm) => ({
+                        ...prevForm,
+                        [name]: value,
+                      }));
+                    }}
                   >
                     <FormControlLabel value="female" control={<Radio />} label="Female" />
                     <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -154,16 +161,13 @@ export default function InvalidForm() {
                   </RadioGroup>
                   
                 </FormControl>
-
-            </Item>
-            <Item>
-                  <FormControl component="fieldset">
+                <FormControl component="fieldset">
                   <FormLabel component="legend">Hobby</FormLabel>
                   <FormGroup aria-label="position" row>
                     <FormControlLabel
                       value="Game"
                       checked={formData.Hobby.includes('Game')}
-                      onChange={handleCheckboxGroupChange}
+                      onChange={(event, checked) => handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)}
                       control={<Checkbox />}
                       label="Game"
                       
@@ -171,27 +175,28 @@ export default function InvalidForm() {
                     <FormControlLabel
                       value="Music"
                       checked={formData.Hobby.includes('Music')}
-                      onChange={handleCheckboxGroupChange}
+                      onChange={(event, checked) => handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)}
                       control={<Checkbox />}
                       label="Music"
                     />
                     <FormControlLabel
                       value="Craft"
                       checked={formData.Hobby.includes('Craft')}
-                      onChange={handleCheckboxGroupChange}  
+                      onChange={(event, checked) => handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)}  
                       control={<Checkbox />}
                       label="Craft"
                     />
                     <FormControlLabel
                       value="Reading"
                       checked={formData.Hobby.includes('Reading')}
-                      onChange={handleCheckboxGroupChange}
+                      onChange={(event, checked) => handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)}
                       control={<Checkbox />}
                       label="Reading"
                     />
                   </FormGroup>
                 </FormControl>
             </Item>
+            
             <Item>
             <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Status</InputLabel>
@@ -201,7 +206,13 @@ export default function InvalidForm() {
               name="Status"
               value={formData.Status}
               label="Status"
-              onChange={handleChange}
+              onChange={(event: SelectChangeEvent) => {
+                const { name, value } = event.target;
+                setFormData((prevForm) => ({
+                  ...prevForm,
+                  [name]: value,
+                }));
+              }}
             >
               <MenuItem value="Single">Single</MenuItem>
               <MenuItem value="Married">Married</MenuItem>
@@ -210,7 +221,7 @@ export default function InvalidForm() {
           </FormControl>
             </Item>
             <Item>
-                <TextField
+                <TextField fullWidth
                  name='Note'
                  id="Note" 
                  label="Note" 
@@ -218,7 +229,7 @@ export default function InvalidForm() {
                  value={formData.Note}
                  onChange={handleChange}/>
             </Item>
-            <Item>
+            <Item sx={{ display: 'flex', justifyContent: 'space-between', padding: 2}}>
             <Button variant="outlined" onClick={handleReset}>RESET</Button>
             <Button variant="contained" onClick={handleSubmit}>SUBMIT</Button>
             </Item>
