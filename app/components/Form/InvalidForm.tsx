@@ -19,6 +19,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import '../css/card.css';
 import Cardtool from './Cardtool'
+import Card from '@mui/material/Card'
+import {Typography,IconButton,CardContent} from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
 
 
 
@@ -105,7 +110,8 @@ export default function InvalidForm() {
   return (
     
     <div className="MuiBox-root css-1i3v59a">
-      
+
+      <Typography variant="h4">Profile management</Typography>
       
 
     <Box sx={{ flexGrow: 1 , padding: 2}}>
@@ -113,7 +119,7 @@ export default function InvalidForm() {
         {/* <Grid item={true} xs={4}> */}
           <Stack spacing={2}>
             <form onSubmit={handleSubmit} className='item'>
-                <TextField sx={{ m: 2,marginLeft: 2 }}
+                <TextField sx={{ m: 2,marginLeft: 1, width: '100%' }}
                 name="Name"
                 id="Name" 
                 label="Name" 
@@ -121,7 +127,7 @@ export default function InvalidForm() {
                 value={formData.Name}
                 onChange={handleChange}/>
                 
-                <TextField sx={{ m: 2,marginLeft: 1}}
+                <TextField sx={{ m: 2,marginLeft: 1, width: '100%'}}
                 name="LastName"
                 id="LastName" 
                 label="Last name" 
@@ -130,7 +136,7 @@ export default function InvalidForm() {
                 onChange={handleChange}/>
           
                 <br></br>          
-              <TextField sx={{ m: 2,marginLeft: 1}}
+              <TextField sx={{ m: 2, marginLeft: 1, width: '100%' }}
                   
                     name="Email"
                     id="Email" 
@@ -245,20 +251,35 @@ export default function InvalidForm() {
                     <Button variant="outlined" onClick={handleReset}>RESET</Button>
                     <Button type="submit" variant="contained">SUBMIT</Button>
             </form>
-          </Stack> 
-          <div>
+          </Stack>
+          <Stack>
               {submittedData.map((data, index) => {
                 return (
-                  <div key={index} className='item' >
-                    {/* แสดงข้อมูลฟอร์มแต่ละชุดที่ submit */}
-                    <p className='item'>Name: {data.Name}</p>
-                    <p className='item'>Last Name: {data.LastName}</p>
-                    <p className='item'>Email: {data.Email}</p>
-                    {/* ข้อมูลอื่นๆ ที่คุณต้องการแสดง */}
-                  </div>
+                
+              <Card key={index} sx={{ mb: 2}}>
+                <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Box>
+                    <Typography variant="subtitle2">USER</Typography>
+                    <Typography>Name: {data.Name}</Typography>
+                    <Typography>Gender: {data.LastName}</Typography>
+                    <Typography>Email: {data.Email}</Typography>
+                    <FormControlLabel disabled control={<Checkbox checked />} label="Confirm PDPA" />
+                  </Box>
+                  <Box>
+                    <Typography>Hobby: {data.Hobby}</Typography>
+                    <Typography>Status: {data.Status}t</Typography>
+                    <Typography>Note: {data.Note}</Typography>
+                  </Box>
+                  <IconButton>
+                    <DeleteIcon />
+                  </IconButton>
+                </CardContent>
+              </Card>
+                    
+                  
                 );
               })}
-            </div>
+        </Stack>    
 
           
        
