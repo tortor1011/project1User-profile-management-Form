@@ -109,17 +109,17 @@ export default function InvalidForm() {
  
   return (
     
-    <div className="MuiBox-root css-1i3v59a">
+    <Grid sx={{ width: 100,xs:10,md:8,sm:5 }} container>
 
       <Typography variant="h4">Profile management</Typography>
       
 
     <Box sx={{ flexGrow: 1 , padding: 2}}>
-      <Grid container spacing={2}>
+      <Grid >
         {/* <Grid item={true} xs={4}> */}
-          <Stack spacing={2}>
+          <Stack spacing={2} gap={5} display={'flex'}>
             <form onSubmit={handleSubmit} className='item'>
-                <TextField sx={{ m: 2,marginLeft: 1, width: '100%' }}
+                <TextField sx={{width: '48%' }}
                 name="Name"
                 id="Name" 
                 label="Name" 
@@ -127,7 +127,7 @@ export default function InvalidForm() {
                 value={formData.Name}
                 onChange={handleChange}/>
                 
-                <TextField sx={{ m: 2,marginLeft: 1, width: '100%'}}
+                <TextField sx={{  width: '48%',right:-27}}
                 name="LastName"
                 id="LastName" 
                 label="Last name" 
@@ -136,7 +136,7 @@ export default function InvalidForm() {
                 onChange={handleChange}/>
           
                 <br></br>          
-              <TextField sx={{ m: 2, marginLeft: 1, width: '100%' }}
+              <TextField sx={{ m: 1, marginLeft: 0, width: '100%' }}
                   
                     name="Email"
                     id="Email" 
@@ -216,7 +216,7 @@ export default function InvalidForm() {
             
             
             
-                    <FormControl fullWidth>
+                    <FormControl fullWidth sx={{ m: 1, marginLeft: 0, width: '100%' }}>
                     <InputLabel id="demo-simple-select-label">Status</InputLabel>
                     <Select
                     labelId="demo-simple-select-label"
@@ -239,7 +239,7 @@ export default function InvalidForm() {
                 </FormControl>
                     
                     
-                        <TextField fullWidth
+                        <TextField fullWidth sx={{ m: 1, marginLeft: 0, width: '100%' }}
                         name='Note'
                         id="Note" 
                         label="Note" 
@@ -248,27 +248,28 @@ export default function InvalidForm() {
                         onChange={handleChange}/>
                     
                     
-                    <Button variant="outlined" onClick={handleReset}>RESET</Button>
-                    <Button type="submit" variant="contained">SUBMIT</Button>
+                    <Button sx={{ left:518,mt:2 }} variant="contained" onClick={handleReset}>RESET</Button>
+                    <Button sx={{ left:533,mt:2 }} type="submit" variant="contained">SUBMIT</Button>
             </form>
           </Stack>
-          <Stack>
+          <Stack  sx={{top:50}}>
               {submittedData.map((data, index) => {
                 return (
                 
-              <Card key={index} sx={{ mb: 2}}>
-                <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Card key={index} sx={{ mb: 5}}>
+                <CardContent sx={{ display: 'flex', justifyContent: 'space-between', gap:'200px', width:'1000px'}}>
                   <Box>
                     <Typography variant="subtitle2">USER</Typography>
                     <Typography>Name: {data.Name}</Typography>
                     <Typography>Gender: {data.LastName}</Typography>
-                    <Typography>Email: {data.Email}</Typography>
+                    <Typography>Status: {data.Status}</Typography>
                     <FormControlLabel disabled control={<Checkbox checked />} label="Confirm PDPA" />
                   </Box>
                   <Box>
-                    <Typography>Hobby: {data.Hobby}</Typography>
-                    <Typography>Status: {data.Status}t</Typography>
-                    <Typography>Note: {data.Note}</Typography>
+                  <br></br>
+                  <Typography>Email: {data.Email}</Typography>
+                  <Typography>Hobby: {data.Hobby}</Typography>
+                  <Typography>Note: {data.Note}</Typography>
                   </Box>
                   <IconButton>
                     <DeleteIcon />
@@ -285,6 +286,6 @@ export default function InvalidForm() {
        
       </Grid>
     </Box>
-    </div>
+    </Grid>
   );
 }

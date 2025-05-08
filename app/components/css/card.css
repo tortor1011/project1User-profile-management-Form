@@ -1,3 +1,4 @@
+
 .item {
     background-color: #fff;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif; 
@@ -11,11 +12,13 @@
     border: solid 1px;
     border-radius: 4px;
     border-color: rgb(221, 221, 221);
-    margin: 20px;
-    width: 600px;
+    margin: 40px;
+    width: 700px;
+    gap: 16px !important;
+    
   
-  }
   
+}
   .item-dark {
     background-color: #1A2027; 
   }
