@@ -108,57 +108,94 @@ export default function InvalidForm() {
 
  
   return (
-    
-    <Grid sx={{ width: 100,xs:10,md:8,sm:5 }} container>
+    <div>
+    <Typography
+      variant="h4"
+      sx={{
+        fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2.125rem' },
+        mb: { xs: 1, sm: 2 },
+        px: 2,
+        py: 1,
+        bgcolor: '#1976d2',
+        color: 'white',
+      }}
+    >
+      Profile Management
+    </Typography>
 
-      <Typography variant="h4">Profile management</Typography>
-      
+    <Box sx={{ flexGrow: 1, p: { xs: 1, sm: 2 } }}>
+      <Grid container spacing={2}>
+        {/* Form Section with Border */}
+        <Grid item xs={12} md={6}>
+          <Box
+            sx={{
+              border: '1px solid #666',
+              borderRadius: 1,
+              p: { xs: 1, sm: 2 },
+              maxWidth: { xs: '100%', sm: 400 },
+              mx: 'auto',
+            }}
+          >
+            <Stack spacing={0.5}>
+              <form onSubmit={handleSubmit}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    gap: 1,
+                    mb: 0.5,
+                  }}
+                >
+                  <TextField
+                    fullWidth
+                    name="Name"
+                    id="Name"
+                    label="Name"
+                    variant="outlined"
+                    value={formData.Name}
+                    onChange={handleChange}
+                    sx={{ maxWidth: 180 }}
+                  />
+                  <TextField
+                    fullWidth
+                    name="LastName"
+                    id="LastName"
+                    label="Last Name"
+                    variant="outlined"
+                    value={formData.LastName}
+                    onChange={handleChange}
+                    sx={{ maxWidth: 180 }}
+                  />
+                </Box>
 
-    <Box sx={{ flexGrow: 1 , padding: 2}}>
-      <Grid >
-        {/* <Grid item={true} xs={4}> */}
-          <Stack spacing={2} gap={5} display={'flex'}>
-            <form onSubmit={handleSubmit} className='item'>
-                <TextField sx={{width: '48%' }}
-                name="Name"
-                id="Name" 
-                label="Name" 
-                variant="outlined"
-                value={formData.Name}
-                onChange={handleChange}/>
-                
-                <TextField sx={{  width: '48%',right:-27}}
-                name="LastName"
-                id="LastName" 
-                label="Last name" 
-                variant="outlined" 
-                value={formData.LastName}
-                onChange={handleChange}/>
-          
-                <br></br>          
-              <TextField sx={{ m: 1, marginLeft: 0, width: '100%' }}
-                  
-                    name="Email"
-                    id="Email" 
-                    label="Email" 
-                  
-                    variant="outlined" 
-                    value={formData.Email}
-                    onChange={handleChange}/>
-            
-            <div >
-                <FormControlLabel              
-                    control={<Checkbox 
+                <TextField
+                  fullWidth
+                  name="Email"
+                  id="Email"
+                  label="Email"
+                  variant="outlined"
+                  value={formData.Email}
+                  onChange={handleChange}
+                  sx={{ mb: 0.5, maxWidth: 360 }}
+                />
+
+                <FormControlLabel
+                  control={
+                    <Checkbox
                       name="Confirm"
                       checked={formData.Confirm}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, Confirm: event.target.checked })}        
-                      id='Confirm'  />} 
-                    label="Confirm PDPA" />
-            </div>
-            
-               <FormControl>
-                    <FormLabel 
-                    id="Gender">Gender</FormLabel>
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setFormData({ ...formData, Confirm: event.target.checked })
+                      }
+                      id="Confirm"
+                    />
+                  }
+                  label="Confirm PDPA"
+                  sx={{ mb: 0.5 }}
+                />
+
+                <FormControl sx={{ mb: 0.5 }}>
+                  <FormLabel id="Gender">Gender</FormLabel>
                   <RadioGroup
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
@@ -174,118 +211,117 @@ export default function InvalidForm() {
                   >
                     <FormControlLabel value="female" control={<Radio />} label="Female" />
                     <FormControlLabel value="male" control={<Radio />} label="Male" />
-                    <FormControlLabel value="etc" control={<Radio />} label="etc" />
-
+                    <FormControlLabel value="etc" control={<Radio />} label="Etc" />
                   </RadioGroup>
-                  
                 </FormControl>
-                <FormControl component="fieldset">
+
+                <FormControl component="fieldset" sx={{ mb: 0.5 }}>
                   <FormLabel component="legend">Hobby</FormLabel>
-                  <FormGroup aria-label="position" row>
-                    <FormControlLabel
-                      value="Game"
-                      checked={formData.Hobby.includes('Game')}
-                      onChange={(event, checked) => handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)}
-                      control={<Checkbox />}
-                      label="Game"
-                      
-                    />
-                    <FormControlLabel
-                      value="Music"
-                      checked={formData.Hobby.includes('Music')}
-                      onChange={(event, checked) => handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)}
-                      control={<Checkbox />}
-                      label="Music"
-                    />
-                    <FormControlLabel
-                      value="Craft"
-                      checked={formData.Hobby.includes('Craft')}
-                      onChange={(event, checked) => handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)}  
-                      control={<Checkbox />}
-                      label="Craft"
-                    />
-                    <FormControlLabel
-                      value="Reading"
-                      checked={formData.Hobby.includes('Reading')}
-                      onChange={(event, checked) => handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)}
-                      control={<Checkbox />}
-                      label="Reading"
-                    />
+                  <FormGroup row>
+                    {['Game', 'Music', 'Craft', 'Reading'].map((hobby) => (
+                      <FormControlLabel
+                        key={hobby}
+                        value={hobby}
+                        checked={formData.Hobby.includes(hobby)}
+                        onChange={(event) =>
+                          handleCheckboxGroupChange(event as React.ChangeEvent<HTMLInputElement>)
+                        }
+                        control={<Checkbox />}
+                        label={hobby}
+                      />
+                    ))}
                   </FormGroup>
                 </FormControl>
-            
-            
-            
-                    <FormControl fullWidth sx={{ m: 1, marginLeft: 0, width: '100%' }}>
-                    <InputLabel id="demo-simple-select-label">Status</InputLabel>
-                    <Select
+
+                <FormControl fullWidth sx={{ mb: 0.5 }}>
+                  <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                  <Select
                     labelId="demo-simple-select-label"
                     id="Status"
                     name="Status"
                     value={formData.Status}
                     label="Status"
                     onChange={(event: SelectChangeEvent) => {
-                        const { name, value } = event.target;
-                        setFormData((prevForm) => ({
+                      const { name, value } = event.target;
+                      setFormData((prevForm) => ({
                         ...prevForm,
                         [name]: value,
-                        }));
+                      }));
                     }}
-                    >
+                  >
                     <MenuItem value="Single">Single</MenuItem>
                     <MenuItem value="Married">Married</MenuItem>
                     <MenuItem value="Divorce">Divorce</MenuItem>
-                    </Select>
+                  </Select>
                 </FormControl>
-                    
-                    
-                        <TextField fullWidth sx={{ m: 1, marginLeft: 0, width: '100%' }}
-                        name='Note'
-                        id="Note" 
-                        label="Note" 
-                        variant="outlined" 
-                        value={formData.Note}
-                        onChange={handleChange}/>
-                    
-                    
-                    <Button sx={{ left:518,mt:2 }} variant="contained" onClick={handleReset}>RESET</Button>
-                    <Button sx={{ left:533,mt:2 }} type="submit" variant="contained">SUBMIT</Button>
-            </form>
-          </Stack>
-          <Stack  sx={{top:50}}>
-              {submittedData.map((data, index) => {
-                return (
-                
-              <Card key={index} sx={{ mb: 5}}>
-                <CardContent sx={{ display: 'flex', justifyContent: 'space-between', gap:'200px', width:'1000px'}}>
+
+                <TextField
+                  fullWidth
+                  name="Note"
+                  id="Note"
+                  label="Note"
+                  variant="outlined"
+                  value={formData.Note}
+                  onChange={handleChange}
+                  sx={{ mb: 0.5, maxWidth: 360 }}
+                />
+
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+                  <Button variant="contained" onClick={handleReset} size="small">
+                    RESET
+                  </Button>
+                  <Button type="submit" variant="contained" size="small">
+                    SUBMIT
+                  </Button>
+                </Box>
+              </form>
+            </Stack>
+          </Box>
+        </Grid>
+
+        {/* Submitted Data Section with Border */}
+        <Grid item xs={12} md={6}>
+          <Stack spacing={1}>
+            {submittedData.map((data, index) => (
+              <Card key={index} sx={{ mb: 1, maxWidth: 400, mx: 'auto' }}>
+                <CardContent
+                  sx={{
+                    border: '1px solid #666',
+                    borderRadius: 1,
+                    p: { xs: 1, sm: 2 },
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    justifyContent: 'space-between',
+                    gap: 1,
+                  }}
+                >
                   <Box>
                     <Typography variant="subtitle2">USER</Typography>
                     <Typography>Name: {data.Name}</Typography>
-                    <Typography>Gender: {data.LastName}</Typography>
+                    <Typography>Last Name: {data.LastName}</Typography>
+                    <Typography>Gender: {data.Gender}</Typography>
                     <Typography>Status: {data.Status}</Typography>
-                    <FormControlLabel disabled control={<Checkbox checked />} label="Confirm PDPA" />
+                    <FormControlLabel
+                      disabled
+                      control={<Checkbox checked={data.Confirm} />}
+                      label="Confirm PDPA"
+                    />
                   </Box>
                   <Box>
-                  <br></br>
-                  <Typography>Email: {data.Email}</Typography>
-                  <Typography>Hobby: {data.Hobby}</Typography>
-                  <Typography>Note: {data.Note}</Typography>
+                    <Typography>Email: {data.Email}</Typography>
+                    <Typography>Hobby: {data.Hobby.join(', ')}</Typography>
+                    <Typography>Note: {data.Note}</Typography>
                   </Box>
                   <IconButton>
                     <DeleteIcon />
                   </IconButton>
                 </CardContent>
               </Card>
-                    
-                  
-                );
-              })}
-        </Stack>    
-
-          
-       
+            ))}
+          </Stack>
+        </Grid>
       </Grid>
     </Box>
-    </Grid>
+  </div>
   );
 }
