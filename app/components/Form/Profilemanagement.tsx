@@ -120,11 +120,11 @@ export default function ManagementForm() {
             variant="h4"
             sx={{
               fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2.125rem' },
-              mb: { xs: 1, sm: 2 ,md:1 },
               px: 1,
               py: 1,
               padding:5,
-              textAlign:'center'
+              textAlign:'center',
+              marginTop:7
             }}
           >
             Profile Management
@@ -133,10 +133,10 @@ export default function ManagementForm() {
                         sx={{
                           border: '1px outset',
                           borderRadius: 1,
-                          p: { xs: 1, sm: 2 },
+                          p: { xs: 1, sm: 2,md:2 },
                           maxWidth: { xs: '100%', sm: 700 },
                           mx: 'auto',
-                        
+                          
                           
                         }}
                       >
@@ -291,7 +291,7 @@ export default function ManagementForm() {
                 </Grid>
 
                 {/* Submitted Data Section with Border */}
-                <Grid sx={{ width: { xs: '100%', sm: '100%', md: 1000 } ,ml:5,mt:5,mb:5 }}> 
+                <Grid sx={{ width: { xs: '100%', sm: '100%', md: 1100 } ,ml:5,mt:5,mb:5 }}> 
                 
                   {submittedData.map((data, index) => (
                     <Card
@@ -301,6 +301,7 @@ export default function ManagementForm() {
                         maxWidth: '100% !important',
                         mx: 'auto',
                         minHeight: 150,
+                        m:5
                       }}
                     >
                       <CardContent
@@ -338,7 +339,8 @@ export default function ManagementForm() {
                               display: 'flex',
                               flexDirection: { xs: 'column', sm: 'row' },
                               gap: 2,
-                              mb: 1.5,
+                              
+                              
                             }}
                           >
                             <Typography>Status: {data.Status || '-'}</Typography>

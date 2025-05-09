@@ -22,3 +22,13 @@
   .item-dark {
     background-color: #1A2027; 
   }
+
+.headerr{
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif; 
+  font-size: 3rem;
+  font-weight: 300;
+  text-align: center;
+  margin: 5px;
+  justify-content: center;
+  
+}

@@ -16,7 +16,7 @@ export default function ColumnLayoutInsideGrid() {
 
   return (
     
-    <div className="MuiBox-root css-1i3v59a">
+    <div>
       <Header/>
       
       <div className="MuiBox-root css-1i3v59a">
