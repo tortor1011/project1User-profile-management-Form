@@ -113,7 +113,7 @@ export default function ManagementForm() {
     
 
     <Box sx={{ flexGrow: 1, p: { xs: 1, sm: 2 },  }}>
-          <Grid container spacing={2}>
+          <Grid container spacing={3} sx={{ marginTop: 2, flexWrap: { xs: "none", sm: "none", md: "nowrap" } }}>
                 {/* Form Section with Border */}
                 <Grid>
                 <Typography
@@ -207,23 +207,23 @@ export default function ManagementForm() {
                       >
                         <FormControl sx={{ mb: 0.5 }}>
                           <FormLabel id="Gender">Gender</FormLabel>
-                          <RadioGroup
+                            <RadioGroup
                             row
                             aria-labelledby="demo-row-radio-buttons-group-label"
                             name="Gender"
-                            value={formData.Gender}
+                            value={formData.Gender || "male"}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                               const { name, value } = event.target;
                               setFormData((prevForm) => ({
-                                ...prevForm,
-                                [name]: value,
+                              ...prevForm,
+                              [name]: value,
                               }));
                             }}
-                          >
-                            <FormControlLabel value="female" control={<Radio />} label="Female" />
+                            >
                             <FormControlLabel value="male" control={<Radio />} label="Male" />
+                            <FormControlLabel value="female" control={<Radio />} label="Female" />
                             <FormControlLabel value="etc" control={<Radio />} label="Etc" />
-                          </RadioGroup>
+                            </RadioGroup>
                         </FormControl>
 
                         <FormControl component="fieldset" sx={{ mb: 0.5 }}>
@@ -291,7 +291,7 @@ export default function ManagementForm() {
                 </Grid>
 
                 {/* Submitted Data Section with Border */}
-                <Grid sx={{ width: { xs: '100%', sm: '100%', md: 1100 } ,ml:5,mt:5,mb:5 }}> 
+                <Grid sx={{ width: { xs: '80%', sm: '100%', md: 500,lg: 1000 } ,ml:5,mt:5,mb:5 }}> 
                 
                   {submittedData.map((data, index) => (
                     <Card
@@ -312,7 +312,7 @@ export default function ManagementForm() {
                           display: 'flex',
                           flexDirection: { xs: 'column', sm: 'row' },
                           justifyContent: 'space-between',
-                          gap: 10,
+                          gap: { xs: 0, sm: 0 ,md: 0,lg: 10 }
                           
                         }}
                       >
