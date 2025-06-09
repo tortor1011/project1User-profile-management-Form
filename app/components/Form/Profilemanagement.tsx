@@ -19,7 +19,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import '../css/card.css';
 import Card from '@mui/material/Card'
-import {Typography,IconButton,CardContent} from '@mui/material'
+import {Typography,IconButton,CardContent, Container} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
@@ -112,7 +112,7 @@ export default function ManagementForm() {
     <div>
     
 
-    <Box sx={{ flexGrow: 1, p: { xs: 1, sm: 2 },  }}>
+    <Container maxWidth={false}>
           <Grid container spacing={3} sx={{ marginTop: 2, flexWrap: { xs: "none", sm: "none", md: "nowrap" } }}>
                 {/* Form Section with Border */}
                 <Grid>
@@ -301,7 +301,6 @@ export default function ManagementForm() {
                         maxWidth: '100% !important',
                         mx: 'auto',
                         minHeight: 150,
-                        m:5
                       }}
                     >
                       <CardContent
@@ -374,7 +373,7 @@ export default function ManagementForm() {
                 
                 </Grid>
           </Grid>
-    </Box>
+    </Container>
   </div>
   );
 }
