@@ -21,6 +21,7 @@ import '../css/card.css';
 import Card from '@mui/material/Card'
 import {Typography,IconButton,CardContent, Container} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
+import AppBar from '@mui/material/AppBar';
 
 
 
@@ -113,6 +114,24 @@ export default function ManagementForm() {
     
 
     <Container maxWidth={false}>
+      <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="fixed" 
+      sx={{ display: "flex" ,
+        maxHeight:"500px",
+        height:"60px",
+        alignItems:"center",
+        justifyContent:"center"
+      
+
+      }}
+    >
+        <Typography 
+        fontWeight={500}
+        sx={{fontSize:"40px"}}>                 
+          User profile management System
+       </Typography>
+      </AppBar>
+    </Box>
           <Grid container spacing={3} sx={{ marginTop: 2, flexWrap: { xs: "none", sm: "none", md: "nowrap" } }}>
                 {/* Form Section with Border */}
                 <Grid>
@@ -120,11 +139,8 @@ export default function ManagementForm() {
             variant="h4"
             sx={{
               fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2.125rem' },
-              px: 1,
-              py: 1,
               padding:5,
               textAlign:'center',
-              marginTop:7
             }}
           >
             Profile Management
